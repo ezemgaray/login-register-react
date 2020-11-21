@@ -1,7 +1,6 @@
 import React              from 'react'
 import { Switch, Route }  from 'react-router-dom';
-import { Panel }          from './PrivateRoutes/Panel'
-import { Profile }        from './PrivateRoutes/Profile'
+import { Panel, Profile } from './PrivateRoutes/'
 
 /**
  * Private routes
