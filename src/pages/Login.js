@@ -1,7 +1,6 @@
 import React                      from 'react'
 import { useSelector }            from 'react-redux'
 import { Navigation, LoginForm }  from '../components'
-import { loginRequest }           from '../redux/actions/user'
 import { Redirect }               from 'react-router-dom'
 
 export const Login = () => {
@@ -16,7 +15,7 @@ export const Login = () => {
       <div className="container">
         <Navigation />
         <div className="d-flex justify-content-center">
-          <LoginForm loginRequest={loginRequest}/>
+          <LoginForm/>
         </div>
       </div>
     )
