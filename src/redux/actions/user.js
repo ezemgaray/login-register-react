@@ -30,6 +30,31 @@ export const loginRequest = (data) => async (dispatch) => {
 }
 
 /**
+ * Register Actions
+ */
+export const registerError   = createAction('registerError')
+export const registerSuccess = createAction('registerSuccess')
+export const registerRequest = (data) => async (dispatch) => {
+  return api.user.register(data)
+    .then(({data}) =>{
+      console.log(data.data);
+      dispatch(registerSuccess(data.data))
+      // reset state tu prevent redirect in register section.
+      setTimeout(() => dispatch(resetStateAction('isRegistered', false)),1000);
+    })
+    .catch(error =>{
+      if(error.response){
+        dispatch(registerError(error.response.data.error))
+      }else{
+        dispatch(registerError({
+          message: error.message,
+          type: "Internal error - 500",
+        }))
+      }
+    })
+}
+
+/**
  * Logout Actions
  */
 export const logoutSuccess  = createAction('logoutSuccess')
@@ -44,4 +69,13 @@ export const logoutRequest  = (dispatch) => {
       type: "Internal error - 500",
     }))
   }
+}
+
+/**
+ * Clear state property
+ * clear or re define property
+ */
+export const resetState = createAction('resetState')
+export const resetStateAction = (property, value) => (dispatch) => {
+  dispatch(resetState({property, value}))
 }
