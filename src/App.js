@@ -8,6 +8,7 @@ import {
   PrivateRoute,
   HomePage,
   Login,
+  Register,
   Private
 } from './pages'
 
@@ -19,6 +20,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <PrivateRoute path="/dashboard" component={Private} />
           <Route path="*" component={ () =>  'Page not found - 404' } />
        </Switch>
