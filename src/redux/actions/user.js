@@ -37,10 +37,9 @@ export const registerSuccess = createAction('registerSuccess')
 export const registerRequest = (data) => async (dispatch) => {
   return api.user.register(data)
     .then(({data}) =>{
-      console.log(data.data);
       dispatch(registerSuccess(data.data))
-      // reset state tu prevent redirect in register section.
-      setTimeout(() => dispatch(resetStateAction('isRegistered', false)),1000);
+      // reset state to prevent redirect in register section.
+      setTimeout(() => dispatch(resetStateAction('isRegistered', false)),1000)
     })
     .catch(error =>{
       if(error.response){
@@ -59,7 +58,7 @@ export const registerRequest = (data) => async (dispatch) => {
  */
 export const logoutSuccess  = createAction('logoutSuccess')
 export const logoutError    = createAction('logoutError')
-export const logoutRequest  = (dispatch) => {
+export const logoutRequest  = () => (dispatch) => {
   try {
     deleteUserToken()
     dispatch(logoutSuccess())
