@@ -1,11 +1,12 @@
 import React, { useState, useEffect }  from 'react'
-import {NavigationContainer} from '../redux/containers/components/NavigationContainer'
+import { NavigationContainer }  from '../redux/containers/components/NavigationContainer'
+import { Button }               from '../components/index'
 
 import { Redirect }       from 'react-router-dom'
 
 
 export const Login = ({
-  currentUserState: { user, error } = {},
+  currentUserState: { user, error, loading } = {},
   loginRequest,
   resetState
 }) => {
@@ -73,12 +74,16 @@ export const Login = ({
                     : ''
                   }
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  >
-                  Login
-                </button>
+                <Button
+                  htmlType='submit'
+                  disabled={loading}
+                >
+                  {
+                    loading
+                      ? 'loading'
+                      : 'Login'
+                  }
+                </Button>
               </form>
             </div>
           </div>
