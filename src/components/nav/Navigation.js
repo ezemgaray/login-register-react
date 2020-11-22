@@ -1,15 +1,15 @@
 import React                      from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {logoutRequest as logout}  from '../../redux/actions/user'
 import { Link, withRouter }       from 'react-router-dom'
 
-const Nav = (props) => {
-  const dispatch = useDispatch()
-  const {user} = useSelector(state => state.user)
+const Nav = ({
+  currentUserState: { user } = {},
+  logout
+}) => {
+
   return (
     <div className="">
       <nav className="navbar navbar-expand-md navbar-light bg-light">
-        <Link className="navbar-brand" to="#">Navbar</Link>
+        <Link className="navbar-brand" to="/">Navbar</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -30,7 +30,7 @@ const Nav = (props) => {
                 {
                   !user
                     ? <Link className="nav-link" to="/login">Login</Link>
-                    : <button className="btn btn-secondary" onClick={()=>{dispatch(logout)}}>Logout</button>
+                    : <button className="btn btn-secondary" onClick={ () => logout() }>Logout</button>
                 }
               </li>
               {
