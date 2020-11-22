@@ -7,11 +7,13 @@ import {
 import {
   PrivateRoute,
   HomePage,
-  Login,
-  Register,
   Private
 } from './pages'
 
+import {
+  LoginContainer,
+  RegisterContainer 
+} from './redux/containers/pages'
 
 export default function App() {
   return (
@@ -19,12 +21,12 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/register" component={RegisterContainer} />
           <PrivateRoute path="/dashboard" component={Private} />
           <Route path="*" component={ () =>  'Page not found - 404' } />
        </Switch>
       </Router>
     </Provider>
-  );
+  )
 }
