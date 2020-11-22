@@ -1,6 +1,7 @@
 import { handleActions }  from 'redux-actions'
 import { getUserToken }   from "../../utils/auth";
 import {
+  loading,
   loginSuccess,
   loginError,
   registerSuccess,
@@ -13,6 +14,12 @@ import {
 const user = getUserToken()
 
 export default handleActions({
+  [loading]: (state, action)=>{
+    return {
+      ...state,
+      loading: true
+    }
+  },
   [loginError]: (state, action)=>{
     return {...state, 
       loading: false,

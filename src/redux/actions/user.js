@@ -6,12 +6,25 @@ import {
   deleteUserToken 
 } from "../../utils/auth"
 
+
+/**
+ * Loading - Waiting for response.
+ */
+export const loading = createAction('loading')
+export const loadingRequest = () => (dispatch) => {
+  dispatch(loading())
+}
+
+
 /**
  * Login Actions
  */
 export const loginError   = createAction('loginError')
 export const loginSuccess = createAction('loginSuccess')
 export const loginRequest = (data) => async (dispatch) => {
+
+  dispatch(loading())
+
   return api.user.login(data)
     .then(({data}) =>{
       setUserToken(data.data)
@@ -35,6 +48,9 @@ export const loginRequest = (data) => async (dispatch) => {
 export const registerError   = createAction('registerError')
 export const registerSuccess = createAction('registerSuccess')
 export const registerRequest = (data) => async (dispatch) => {
+
+  dispatch(loading())
+
   return api.user.register(data)
     .then(({data}) =>{
       dispatch(registerSuccess(data.data))
