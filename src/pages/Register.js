@@ -1,10 +1,10 @@
 import React, { useState, useEffect }  from 'react'
-import {NavigationContainer} from '../redux/containers/components/NavigationContainer'
-
-import { Redirect }         from 'react-router-dom'
+import {NavigationContainer}  from '../redux/containers/components/NavigationContainer'
+import { Button }             from '../components/index'
+import { Redirect }           from 'react-router-dom'
 
 export const Register = ({
-  currentUserState: { user, error, isRegistered } = {},
+  currentUserState: { user, error, isRegistered, loading } = {},
   registerRequest,
   resetState
 }) => {
@@ -15,7 +15,7 @@ export const Register = ({
 
   const [credentials, setCredentials] = useState({name: null, email: null, password: null})
   const {path, message} = error
-  
+
   const handleRegister = () =>{
     registerRequest(credentials)
   }
@@ -89,12 +89,16 @@ export const Register = ({
                     : ''
                   }
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  >
-                  Register
-                </button>
+                <Button
+                  htmlType='submit'
+                  disabled={loading}
+                >
+                  {
+                    loading
+                      ? 'loading'
+                      : 'Register'
+                  }
+                </Button>
               </form>
             </div>
           </div>
