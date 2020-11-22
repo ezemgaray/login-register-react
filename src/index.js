@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React            from 'react'
+import ReactDOM         from 'react-dom'
+import App              from './App'
+import reportWebVitals  from './reportWebVitals'
+// eslint-disable-next-line no-unused-vars
+import $                from 'jquery'
+// eslint-disable-next-line no-unused-vars
+import Popper           from 'popper.js'
 import './styles/index.scss'
-// eslint-disable-next-line no-unused-vars
-import $ from 'jquery'
-// eslint-disable-next-line no-unused-vars
-import Popper from 'popper.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
