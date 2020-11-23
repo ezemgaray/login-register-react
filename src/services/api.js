@@ -4,7 +4,7 @@ const requestHelper = axios.create({
   baseURL: 'http://localhost:4000/'
 })
 
- const routes = {
+const routes = {
   user: {
     register: data => requestHelper({
       url: 'register',
@@ -15,6 +15,13 @@ const requestHelper = axios.create({
       url: 'login',
       method: 'post',
       data
+    }),
+    whoami: (token) => requestHelper({
+      url: 'whoami',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      method: 'get'
     })
   }
 }
