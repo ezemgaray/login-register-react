@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const requestHelper = axios.create({
-  baseURL: 'https://property-search-engine-api.herokuapp.com/'
+  baseURL: 'http://localhost:4000/'
 })
 
  const routes = {
