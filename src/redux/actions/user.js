@@ -27,7 +27,7 @@ export const loginRequest = (data) => async (dispatch) => {
 
   return api.user.login(data)
     .then(({data}) =>{
-      setUserToken(data.data)
+      setUserToken(data.data.token)
       dispatch(loginSuccess(data.data))
     })
     .catch(error =>{
