@@ -35,8 +35,8 @@ export const loginRequest = (data) => async (dispatch) => {
         dispatch(loginError(error.response.data.error))
       }else{
         dispatch(loginError({
-          message: error.message,
-          type: "Internal error - 500",
+          message: `${error.message} - Internal Error. Try again`,
+          type: 500,
         }))
       }
     })
@@ -62,8 +62,8 @@ export const registerRequest = (data) => async (dispatch) => {
         dispatch(registerError(error.response.data.error))
       }else{
         dispatch(registerError({
-          message: error.message,
-          type: "Internal error - 500",
+          message: `${error.message} - Internal Error`,
+          type: 500,
         }))
       }
     })
@@ -81,7 +81,7 @@ export const logoutRequest  = () => (dispatch) => {
   } catch (error) {
     dispatch(logoutError({
       message: error.message,
-      type: "Internal error - 500",
+      type: 500,
     }))
   }
 }

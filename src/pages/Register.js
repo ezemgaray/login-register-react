@@ -32,6 +32,13 @@ export const Register = ({
           <div className="card border-ligth mt-3 shadow">
             <div className="card-header">Register</div>
             <div className="card-body">
+              {
+                error && error.type === 500
+                  ? (
+                  <div className="alert alert-danger">{message}</div>
+                  )
+                  : ''
+              }
               <form
                 onSubmit={ (e) => {
                   e.preventDefault()
