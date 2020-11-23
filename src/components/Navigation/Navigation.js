@@ -2,7 +2,7 @@ import React                      from 'react'
 import { NavLink, withRouter }    from 'react-router-dom'
 
 const Nav = ({
-  currentUserState: { user } = {},
+  currentUserState: { isLogedIn } = {},
   logout
 }) => {
 
@@ -44,7 +44,7 @@ const Nav = ({
           </ul>
           <ul className="navbar-nav">
             {
-              !user
+              !isLogedIn
                 ? (
                   <>
                     <li className="nav-item">

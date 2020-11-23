@@ -6,7 +6,7 @@ import { Redirect }       from 'react-router-dom'
 
 
 export const Login = ({
-  currentUserState: { user, error, loading } = {},
+  currentUserState: { isLoggedIn, error, loading } = {},
   loginRequest,
   resetState
 }) => {
@@ -24,7 +24,7 @@ export const Login = ({
   }
 
   // If there is a logged in user, redirect to the panel.
-  return user
+  return isLoggedIn
     ? (<Redirect to="/dashboard" />)
     : (
       <div className="container">

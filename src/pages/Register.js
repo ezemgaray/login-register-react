@@ -4,7 +4,7 @@ import { Button }             from '../components/index'
 import { Redirect }           from 'react-router-dom'
 
 export const Register = ({
-  currentUserState: { user, error, isRegistered, loading } = {},
+  currentUserState: { isLoggedIn, error, isRegistered, loading } = {},
   registerRequest,
   resetState
 }) => {
@@ -23,7 +23,7 @@ export const Register = ({
   // If there is a logged in user, redirect to the panel.
   return isRegistered
     ? (<Redirect to="/login" />)
-    : user
+    : isLoggedIn
       ? (<Redirect to="/dashboard" />)
       : (
       <div className="container">
