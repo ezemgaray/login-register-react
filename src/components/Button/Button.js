@@ -1,5 +1,5 @@
-import React from "react";
-import cn from "classnames";
+import React from "react"
+import cn from "classnames"
 
 export const Button = ({
   children,
@@ -12,7 +12,7 @@ export const Button = ({
     "btn",
     variant ? `btn-${variant}` : "btn-primary",
     additionalClasses && additionalClasses.split(" "),
-  );
+  )
 
   return (
     <button className={classes} type={htmlType} {...props}>
@@ -32,6 +32,6 @@ export const Button = ({
           : children
       }
     </button>
-  );
+  )
 }
 
