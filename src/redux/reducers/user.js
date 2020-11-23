@@ -1,5 +1,4 @@
 import { handleActions }  from 'redux-actions'
-import { getUserToken }   from "../../utils/auth";
 import {
   loading,
   loginSuccess,
@@ -11,7 +10,6 @@ import {
   resetState
 } from '../actions/user'
 
-const user = getUserToken()
 
 export default handleActions({
   [loading]: (state, action)=>{
@@ -21,7 +19,8 @@ export default handleActions({
     }
   },
   [loginError]: (state, action)=>{
-    return {...state, 
+    return {
+      ...state, 
       loading: false,
       error: action.payload
     }
@@ -29,7 +28,11 @@ export default handleActions({
   [loginSuccess]: (state, action)=>{
     return {
       ...state,
-      user: action.payload.user,
+      isLoggedIn: true,
+      user: {
+        ...action.payload.user,
+        token: action.payload.token
+      },
       loading: false,
       error: false
     }
@@ -43,7 +46,8 @@ export default handleActions({
     }
   },
   [registerError]: (state, action)=>{
-    return {...state, 
+    return {
+      ...state, 
       loading: false,
       error: action.payload
     }
@@ -51,6 +55,7 @@ export default handleActions({
   [logoutSuccess]: (state, action)=>{
     return {
       ...state,
+      isLoggedIn: false,
       user: null,
       loading: false,
       error: false
@@ -70,8 +75,14 @@ export default handleActions({
     }
   }
 }, {
-  user: user ? user : null,
   loading: false,
-  status: null,
   error: false,
+  isLoggedIn: false,
+  isRegistered: false,
+  user: {
+    name: null,
+    email: null,
+    _id: null,
+    token: null
+  },
 })
