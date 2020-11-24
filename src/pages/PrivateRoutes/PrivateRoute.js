@@ -15,12 +15,9 @@ export const PrivateRoute = ({component: Component, ...rest}) => {
         ? <Component {...props} />
         : <Redirect to={{
           pathname: "/login",
-          // state: {
-          //   from: props.location,
-          // }
-          // You can also add a location status to define 'from'.
-          // That way, you can redirect to the page 'from' after login.
-          // Access by 'props.location.state.from'
+          state: {
+            from: props.location,
+          }
         }} />
     )} />
   )
