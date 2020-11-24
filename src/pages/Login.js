@@ -6,10 +6,14 @@ import { Redirect }       from 'react-router-dom'
 
 
 export const Login = ({
+  location: { state },
   currentUserState: { isLoggedIn, error, loading } = {},
   loginRequest,
   resetState
 }) => {
+
+  // Destruct the location state to redirect to the required page after authenticating
+  const { from } = state
 
   useEffect(() => {
     resetState('error', false)
@@ -25,7 +29,7 @@ export const Login = ({
 
   // If there is a logged in user, redirect to the panel.
   return isLoggedIn
-    ? (<Redirect to="/dashboard" />)
+    ? (<Redirect to={from.pathname} />)
     : (
       <div className="container">
         <NavigationContainer />
