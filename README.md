@@ -1,75 +1,181 @@
 # login-register-react
 A login/Register flow with React, Redux
 
+## Table of Contents
 
-# Getting Started with Create React App
+- [The project](#the-project)
+  - [Routes](#routes)
+  - [Built with](#built-with)
+- [Getting Started](#getting-tarted)
+  - [Prerequisites](#prerequisites)
+  - [Instalation](#instalation)
+- [Development](#development)
+  - [Private Routes](#private-routes)
+  - [Load User](#load-user)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## The project  
+[&#8593; Guide](#table-of-content)
 
-In the project directory, you can run:
+Login/Register worklow application that implements private routes and asynchronous actions.  
+When a user is authenticathed only the token is saved to local storage to prevent esposure data and tampering.
+If the token saved is tampered with, when the app loads, it checks the token and removes it if it's wrong.  
+Just to check the private paths, the navbar always shows `/dashboard` and `/profile`.  
+This project works with **login-register-api**. -> [view repo](https://github.com/ezemgaray/login-register-api)
 
-### `npm start`
+### Routes
+  Public and Private routes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Public
+  - `/`
+  - `/login`
+  - `/register`
+- Private
+  - `/dashboard`
+  - `/dashboard/profile`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Built with
 
-### `npm test`
+- [React](https://reactjs.org)
+- [Redux](https://redux.js.org)
+- [Create react app](https://create-react-app.dev/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
+[&#8593; Guide](#table-of-content)
 
-### `npm run build`
+### Prerequisites
+This project requires the following to run
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Node js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [login-register-api](https://github.com/ezemgaray/login-register-api)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Instalation 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Clone repos
+  - `git clone https://github.com/ezemgaray/login-register-react.git`
+  - `git clone https://github.com/ezemgaray/login-register-api`
+- Install NPM packages
+  - `npm install`
+- Run
+  - `npm start``
 
-### `npm run eject`
+## Development
+[&#8593; Guide](#table-of-content)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Private Routes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To make private routes I use a component like a middleware. This component check the estate `isLoggedIn` and if it's **true**, go to the private path or redirect to the Login page if it's **false**.  
+In the redirect, the `state.from` is added to go to the previously required page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Check authentication**  
+`src/pages/PrivateRoutes/PrivateRoute.js`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript
+export const PrivateRoute = ({component: Component, ...rest}) => {
+  const {isLoggedIn} = useSelector(state => state.user)
+  return (
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /login page
+    <Route {...rest} render={ props => (
+      isLoggedIn
+        ? <Component {...props} />
+        : <Redirect to={{
+          pathname: "/login",
+          state: {
+            from: props.location,
+          }
+        }} />
+    )} />
+  )
+}
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Main Router**  
+`src/App.js`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
 
-### Code Splitting
+export default function App() {
+  return (
+    <Provider store={store}>
+      <LoadUserContainer/>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/register" component={RegisterContainer} />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+          // Otherwise, redirect the user to /login page
+          <PrivateRoute path="/dashboard" component={Private} />
 
-### Analyzing the Bundle Size
+          <Route path="*" component={ () =>  'Page not found - 404' } />
+       </Switch>
+      </BrowserRouter>
+    </Provider>
+  )
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Private Routes**  
+`src/pages/Private.js`
 
-### Making a Progressive Web App
+```javascript
+export const Private = () => (
+  <Switch>
+    <Route path="/dashboard/profile" component={Profile} />
+    <Route exact path="/dashboard" component={Panel} />
+    <Route path="/dashboard*" component={ () =>  'Page not found - 404' } />
+  </Switch>
+)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Load User
 
-### Advanced Configuration
+When a user logs in, only the token received from the API is saved to local storage. In this way when the app is loaded, the first action is to check if a token exists to know if a user is logged in and to fill in the user `state`.
+Because the local storage can be tampered with, the user data is not saved, that way is necessary to check if the token is correct and retreive user data from the API. If the token is invalid, it's removed
+To do that I'm using the following component before the main router
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`src/redux/containers/components/LoadUserContainer.js`
 
-### Deployment
+```javascript
+function LoadUser({
+  resetState
+}) {
+  useEffect(()=>{
+    /**
+     * Check user logged in. 
+     * Check if the token is correck and return user data.
+     */
+    const checkLoggedIn = async () => {
+      const token = getUserToken()
+      if(!token) return // If there are no toke, continue
+      const user = await api.user.whoami(token)
+        .then(({data}) => data)
+        .catch( _ => {
+          deleteUserToken() // When the token is wron, remove it
+        })
+      // Update state only if the token is correct
+      if(user){
+        resetState('user', {
+          ...user,
+          token
+        })
+        resetState('isLoggedIn', true)
+      }
+    }
+    checkLoggedIn()
+  }, [resetState])
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  return (<></>)
+}
+```
 
-### `npm run build` fails to minify
+## Authors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Ezequiel Garay](https://github.com/ezemgaray) [![LinkedIn][linkedin-shield]][linkedin-url]
 
+
+
+[linkedin-url]: https://linkedin.com/in/ezequiel-garay
