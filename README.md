@@ -1,5 +1,6 @@
-# login-register-react
-A login/Register flow with React, Redux
+# login-register-react  
+A login/Register workflow with React, Redux.
+This repository only contains the client side. The server side is in the repository [login-register-api](https://github.com/ezemgaray/login-register-api).  
 
 ## Table of Contents
 
@@ -58,7 +59,7 @@ This project requires the following to run
 - Install NPM packages
   - `npm install`
 - Run
-  - `npm start``
+  - `npm start`
 
 ## Development
 [&#8593; Guide](#table-of-content)
