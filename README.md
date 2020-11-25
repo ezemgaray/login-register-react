@@ -17,7 +17,7 @@ The back end (API) is in the repo: [login-register-api](https://github.com/ezemg
 
 
 ## The project  
-[&#8593; Guide](#table-of-content)
+[&#8593; Guide](#table-of-contentsss)
 
 Login/Register worklow application that implements private routes and asynchronous actions.  
 When a user is authenticathed only the token is saved to local storage to prevent esposure data and tampering.
@@ -43,7 +43,7 @@ This project works with **login-register-api**. -> [view repo](https://github.co
 - [Create react app](https://create-react-app.dev/)
 
 ## Getting Started
-[&#8593; Guide](#table-of-content)
+[&#8593; Guide](#table-of-contents)
 
 ### Prerequisites
 This project requires the following to run
@@ -63,7 +63,7 @@ This project requires the following to run
   - `npm start`
 
 ## Development
-[&#8593; Guide](#table-of-content)
+[&#8593; Guide](#table-of-contents)
 
 ### Private Routes
 
@@ -134,6 +134,7 @@ export const Private = () => (
 ```
 
 ### Load User
+[&#8593; Guide](#table-of-contents)
 
 When a user logs in, only the token received from the API is saved to local storage. In this way when the app is loaded, the first action is to check if a token exists to know if a user is logged in and to fill in the user `state`.
 Because the local storage can be tampered with, the user data is not saved, that way is necessary to check if the token is correct and retreive user data from the API. If the token is invalid, it's removed
