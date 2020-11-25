@@ -177,7 +177,8 @@ function LoadUser({
 
 ## Authors
 
-- [Ezequiel Garay](https://github.com/ezemgaray) [![LinkedIn][linkedin-shield]][linkedin-url]
+- [Ezequiel Garay](https://github.com/ezemgaray)  
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
