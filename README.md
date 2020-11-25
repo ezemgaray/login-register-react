@@ -1,6 +1,7 @@
 # login-register-react  
-A login/Register workflow with React, Redux.
-This repository only contains the client side. The server side is in the repository [login-register-api](https://github.com/ezemgaray/login-register-api).  
+Login/Register workflow. This is part of a MERN stack project where the front end was built with React, Redux and back end with Mongo, Node and Express.
+
+The back end (API) is in the repo: [login-register-api](https://github.com/ezemgaray/login-register-api).
 
 ## Table of Contents
 
