@@ -8,7 +8,7 @@ The back end (API) is in the repo: [login-register-api](https://github.com/ezemg
 - [The project](#the-project)
   - [Routes](#routes)
   - [Built with](#built-with)
-- [Getting Started](#getting-tarted)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Instalation](#instalation)
 - [Development](#development)
@@ -17,7 +17,7 @@ The back end (API) is in the repo: [login-register-api](https://github.com/ezemg
 
 
 ## The project  
-[&#8593; Guide](#table-of-contentsss)
+[&#8593; Guide](#table-of-contents)
 
 Login/Register worklow application that implements private routes and asynchronous actions.  
 When a user is authenticathed only the token is saved to local storage to prevent esposure data and tampering.
@@ -180,5 +180,5 @@ function LoadUser({
 - [Ezequiel Garay](https://github.com/ezemgaray) [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ezequiel-garay
